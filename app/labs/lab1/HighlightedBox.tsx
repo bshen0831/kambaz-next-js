@@ -68,11 +68,11 @@ export default function HighlightedBoxLab() {
                 borderWidth={4}
                 borderRadius={50}
             >
-                <h4>Brian S.</h4>
+                <h4>Brian S. Goals</h4>
                 <ul>
-                    <li>Learn tools</li>
-                    <li>Build projects</li>
-                    <li>Collaborate with others</li>
+                    <li>Learn web dev tools</li>
+                    <li>Build web projects</li>
+                    <li>Collaborate and meet with others</li>
                 </ul>
             </HighlightedBox>
             <HighlightedBox
