@@ -2,7 +2,7 @@ import HeadingTags from "./HeadingTags";
 import ParagraphTag from "./ParagraphTag";
 import ListTags from "./ListTags";
 import Tables from "./Tables";
-import Images from "./Images"; 
+import Images from "./Images";
 import Forms from "./forms/Forms";
 import HighlightedParagraph from "./HighlightedParagraph";
 import HighlightedBox from "./HighlightedBox";
@@ -24,6 +24,6 @@ export default function Lab1() {
       <AnchorTag />
       {/* do the next exercise here */}
     </div>
-    
+
   );
 }
