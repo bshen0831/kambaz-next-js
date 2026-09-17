@@ -35,7 +35,7 @@ export default function ListTags() {
       </ul>
 
 My Recipe (eggs)
-        <ol id="wd-your-favorite-recipe,">
+        <ol id="wd-your-favorite-recipe">
         <li>Crack egg into bowl.</li>
         <li>Beat eggs well.</li>
         <li>Add salt and pepper to eggs.</li>

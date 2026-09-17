@@ -27,6 +27,9 @@ export default function Forms() {
         <Buttons />
         <YourForm />
       </form>
+      <form id="wd-your-form" onSubmit={(event) => { event.preventDefault(); }}>
+        <YourForm />
+      </form>
     </div>
   );
 }
