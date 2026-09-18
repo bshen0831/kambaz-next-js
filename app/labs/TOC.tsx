@@ -9,6 +9,11 @@ export default function TOC() {
                 </Link>
             </li>
             <li>
+                <Link href="/labs/" id="wd-labs-link">
+                    Labs
+                </Link>
+            </li>
+            <li>
                 <Link href="/labs/lab1" id="wd-lab1-link">
                     Lab 1
                 </Link>
@@ -40,6 +45,11 @@ export default function TOC() {
                 <a href="https://webdev-client.vercel.app/book/ch1#sec-1-3-11" id="wd-book-chapter-1">
                     Link to book chapter 1, section 1.3.11
                 </a>
+            </li>
+            <li>
+                <Link href="../" id="wd-kambaz-link">
+                    Kambaz
+                </Link>
             </li>
         </ul>
     </div></>
