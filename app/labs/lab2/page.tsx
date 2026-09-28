@@ -1,8 +1,9 @@
 import "./index.css";
 import ForegroundColors from "./ForegroundColors";
+import BackgroundColors from "./BackgroundColors";
+import Borders from "./Borders";
 
 export default function Lab2() {
-
     return (
         <><div id="wd-lab2">
             <h2>Lab 2 - Cascading Style Sheets</h2>
@@ -112,6 +113,8 @@ export default function Lab2() {
                 </p>
             </div>
             <ForegroundColors />
+            <BackgroundColors />
+            <Borders />
         </>
     );
 }
