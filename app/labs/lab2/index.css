@@ -1,0 +1,63 @@
+/* p {
+  background-color: green;
+  color: white;
+} */
+
+p#wd-id-selector-1 {
+  background-color: red;
+  color: white;
+}
+p#wd-id-selector-2 {
+  background-color: yellow;
+  color: black;
+}
+p#wd-ai-id-selector {
+  background-color: teal;
+  color: white;
+}
+p#wd-id-selector-3 {
+  background-color: pink;
+  color: white;
+}
+
+h2 {
+  background-color: navy;
+  color: white;
+}
+
+h3 {
+    background-color: grey;
+    color: yellow;
+}
+
+.wd-class-selector {
+  background-color: yellow;
+  color: blue;
+}
+
+.wd-ai-class-selector {
+  background-color: #20B2AA;
+  color: #FFD700;
+}
+
+.wd-your-class {
+  background-color: orange;
+  color: white;
+}
+
+.wd-selector-1 .wd-selector-3 {
+  background-color: red;
+  color: white;
+}
+.wd-selector-2 > .wd-selector-3 > .wd-selector-4 {
+  background-color: yellow;
+  color: blue;
+}
+.wd-selector-2 > .wd-selector-3 > .wd-selector-5 {
+  background-color: purple;
+  color: white;
+}
+.wd-selector-1 .wd-ai-selector-5 {
+  background-color: #FF6347;
+  color: #FFFFFF;
+}
