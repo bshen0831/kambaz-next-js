@@ -5,6 +5,12 @@ export default function Labs() {
         <div id="wd-labs">
             <h1>Labs</h1>
             <ul>
+                <h2>Brian Shen</h2>
+                <li>
+                    <a href="https://github.com/bshen0831/kambaz-next-js" id="wd-github" target="_blank" rel="noopener noreferrer">
+                        Github Link
+                    </a>
+                </li>
                 <li>
                     <Link href="/labs/lab1" id="wd-lab1-link">
                         Lab 1: HTML Examples
