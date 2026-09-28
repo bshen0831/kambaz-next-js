@@ -1,4 +1,5 @@
 import "./index.css";
+import ForegroundColors from "./ForegroundColors";
 
 export default function Lab2() {
 
@@ -97,9 +98,20 @@ export default function Lab2() {
                     </div>
                 </div>
             </div>
+            <div id="wd-css-conflicts">
+                <span className="class-conflict" id="id-conflict">This span has an ID conflict, class conflict, and tag conflict.</span>
+            </div>
 
-
-
+            <div id="wd-css-cascade">
+                <h3>Cascading and Specificity</h3>
+                <p id="wd-ai-cascade" className="wd-ai-cascade">
+                    This paragraph has an id, a class, and matches a p tag selector.
+                    The background color demonstrates CSS specificity: id rules have
+                    higher specificity than class rules, which have higher specificity
+                    than tag rules. Therefore, the id rule should win.
+                </p>
+            </div>
+            <ForegroundColors />
         </>
     );
 }

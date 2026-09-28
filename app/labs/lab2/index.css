@@ -61,3 +61,37 @@ h3 {
   background-color: #FF6347;
   color: #FFFFFF;
 }
+
+span {
+    background-color: red;
+    color: white;
+}
+
+#id-conflict{
+    background-color: green;
+    color: white;
+}
+
+.class-conflict{
+    background-color: blue;
+    color: white;
+}
+
+/* Cascade demo: ID selector has highest specificity and wins */
+p {
+    background-color: green;
+}
+
+.wd-ai-cascade {
+    background-color: yellow;
+}
+
+#wd-ai-cascade {
+    background-color: red;
+}   
+
+.wd-fg-color-black { color: black; }
+.wd-fg-color-white { color: white; }
+.wd-fg-color-blue { color: #7070ff; }
+.wd-fg-color-red { color: #ff7070; }
+.wd-fg-color-green { color: green; }
