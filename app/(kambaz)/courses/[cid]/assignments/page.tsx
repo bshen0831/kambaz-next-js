@@ -1,3 +1,5 @@
+import "@/app/labs/lab2/tailwind/utilities.css";
+import { FaPlus, FaSearch } from "react-icons/fa";
 import AssignmentItem from "./AssignmentItem";
 
 export default async function Assignments({
@@ -8,27 +10,67 @@ export default async function Assignments({
     const { cid } = await params;
     return (
         <div id="wd-assignments">
-            <label htmlFor="wd-search-assignment"></label>
-            <input placeholder="Search assignments..." id="wd-search-assignment" />
-            <button id="wd-add-assignment-group" className="wd-button wd-button-primary">
-                + Group
-            </button>
-            <button id="wd-add-assignment" className="wd-button wd-button-primary">
-                + Assignment
-            </button>
-            <br />
-            <h3 className="wd-assignments-title">ASSIGNMENTS 40% of Total
-                <button id="wd-add-assignment-group" className="wd-button wd-button-primary">
-                    +
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+                <div className="relative">
+                    <FaSearch className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-neutral-500" />
+                    <input
+                        placeholder="Search for Assignments"
+                        id="wd-search-assignment"
+                        className="rounded border py-1.5 pr-3 pl-9 text-sm"
+                    />
+                </div>
+                <div className="flex gap-2">
+                    <button
+                        id="wd-add-assignment-group"
+                        type="button"
+                        className="inline-flex items-center gap-1 rounded border px-3 py-1.5 text-sm"
+                    >
+                        <FaPlus /> Group
+                    </button>
+                    <button
+                        id="wd-add-assignment"
+                        type="button"
+                        className="inline-flex items-center gap-1 rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white"
+                    >
+                        <FaPlus /> Assignment
+                    </button>
+                </div>
+            </div>
+            <h3
+                id="wd-assignments-title"
+                className="mb-3 flex items-center justify-between rounded bg-neutral-200 p-3 text-lg"
+            >
+                <span>ASSIGNMENTS 40% of Total</span>
+                <button type="button" className="rounded border bg-white px-2 py-0.5 text-sm">
+                    <FaPlus />
                 </button>
             </h3>
-
-            {/* h3 wd-assignments-title */}
-            <ul id="wd-assignment-list">
-                <AssignmentItem cid={cid} title="Assignment 1: Introduction to Web Development" aid={"1"} details={"asdf"} />
-                <AssignmentItem cid={cid} title="Assignment 2: Creating a Simple Web Page" aid={"2"} details={"fdsa"} />
-                <AssignmentItem cid={cid} title="Assignment 3: Building a React Component" aid={"3"} details={"a"} />
-                <AssignmentItem cid={cid} title="Assignment 4: Styling with CSS" aid={"4"} details={"s"} />
+            <ul id="wd-assignment-list" className="m-0 list-none p-0">
+                <AssignmentItem
+                    cid={cid}
+                    aid="123"
+                    title="A1 - ENV + HTML"
+                    details="Multiple Modules | Not available until May 6 at 12:00am | Due May 13 at 11:59pm | 100 pts"
+                />
+                <AssignmentItem
+                    cid={cid}
+                    aid="4567"
+                    title="A2 - CSS + Tailwind"
+                    details="Multiple Modules | Not available until May 13 at 12:00am | Due May 20 at 11:59pm | 100 pts"
+                />
+                <AssignmentItem
+                    cid={cid}
+                    aid="789"
+                    title="A3 - JavaScript"
+                    details="Multiple Modules | Not available until May 21 at 12:00am | Due May 27 at 11:59pm | 100 pts"
+                />
+                <AssignmentItem
+                    cid={cid}
+                    aid="ai-a"
+                    title="A9 - Sample assignment"
+                    details="Multiple Modules | Not available until Jun 3 at 12:00am | Due Jun 10 at 11:59pm | 100 pts"
+                />
+                {/* ...remaining AssignmentItems... */}
             </ul>
         </div>
     );

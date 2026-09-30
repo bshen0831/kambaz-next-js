@@ -67,25 +67,7 @@ export default function KambazNavigation() {
                 <br />
                 Help
             </Link>
-            {/* ...Courses, Calendar, Inbox, Labs... */}
+
         </nav>
     );
 }
-
-{/*
-    <Link href="/courses" id="wd-course-link">
-                Courses
-            </Link>
-            <br />
-            <Link href="/calendar" id="wd-calendar-link">
-                Calendar
-            </Link>
-            <br />
-            <Link href="/inbox" id="wd-inbox-link">
-                Inbox
-            </Link>
-            <br />
-            <Link href="/labs" id="wd-labs-link">
-                Labs
-            </Link>
-    */}
