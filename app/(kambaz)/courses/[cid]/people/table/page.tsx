@@ -1,6 +1,18 @@
 import { FaUserCircle } from "react-icons/fa";
+import * as db from "../../../../database";
 
-export default function PeopleTable() {
+export default async function PeopleTable({
+    params,
+}: {
+    params: Promise<{ cid: string }>;
+}) {
+    const { cid } = await params;
+    const { users, enrollments } = db;
+    const enrolled = users.filter((usr) =>
+        enrollments.some(
+            (enrollment) => enrollment.user === usr._id && enrollment.course === cid,
+        ),
+    );
     return (
         <div id="wd-people-table" className="overflow-x-auto">
             <table className="w-full border-collapse text-left text-sm">
@@ -15,87 +27,20 @@ export default function PeopleTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr className="odd:bg-neutral-50">
-                        <td className="p-2 text-nowrap">
-                            <FaUserCircle className="me-2 inline align-middle text-4xl text-neutral-500" />Tony Stark
-                        </td>
-                        <td className="p-2">001234561S</td>
-                        <td className="p-2">S101</td>
-                        <td className="p-2">STUDENT</td>
-                        <td className="p-2">2020-10-01</td>
-                        <td className="p-2">10:21:32</td>
-                    </tr>
-
-                    <tr className="odd:bg-neutral-50">
-                        <td className="p-2 text-nowrap">
-                            <FaUserCircle className="me-2 inline align-middle text-4xl text-neutral-500" />
-                            Jane Sample
-                        </td>
-                        <td className="p-2">001234562S</td>
-                        <td className="p-2">S103</td>
-                        <td className="p-2">STUDENT</td>
-                        <td className="p-2">2020-10-15</td>
-                        <td className="p-2">8:45:21</td>
-                    </tr>
-
-                    <tr className="odd:bg-neutral-50">
-                        <td className="p-2 text-nowrap">
-                            <FaUserCircle className="me-2 inline align-middle text-4xl text-neutral-500" />
-                            Alex Sample
-                        </td>
-                        <td className="p-2">001234563S</td>
-                        <td className="p-2">S104</td>
-                        <td className="p-2">STUDENT</td>
-                        <td className="p-2">2020-10-20</td>
-                        <td className="p-2">7:32:15</td>
-                    </tr>
-
-                    <tr className="odd:bg-neutral-50">
-                        <td className="p-2 text-nowrap">
-                            <FaUserCircle className="me-2 inline align-middle text-4xl text-neutral-500" />
-                            Sam Sample
-                        </td>
-                        <td className="p-2">001234564S</td>
-                        <td className="p-2">S105</td>
-                        <td className="p-2">STUDENT</td>
-                        <td className="p-2">2020-10-25</td>
-                        <td className="p-2">9:15:48</td>
-                    </tr>
-
-                    <tr className="odd:bg-neutral-50">
-                        <td className="p-2 text-nowrap">
-                            <FaUserCircle className="me-2 inline align-middle text-4xl text-neutral-500" />
-                            John Doe
-                        </td>
-                        <td className="p-2">123498ufasd</td>
-                        <td className="p-2">S102</td>
-                        <td className="p-2">STUDENT</td>
-                        <td className="p-2">2020-12-02</td>
-                        <td className="p-2">12:12:52</td>
-                    </tr>
-                    <tr className="odd:bg-neutral-50">
-                        <td className="p-2 text-nowrap">
-                            <FaUserCircle className="me-2 inline align-middle text-4xl text-neutral-500" />
-                            Jane Doe
-                        </td>
-                        <td className="p-2">1394814</td>
-                        <td className="p-2">S102</td>
-                        <td className="p-2">STUDENT</td>
-                        <td className="p-2">2022-12-21</td>
-                        <td className="p-2">12:12:52</td>
-                    </tr>
-                    <tr className="odd:bg-neutral-50">
-                        <td className="p-2 text-nowrap">
-                            <FaUserCircle className="me-2 inline align-middle text-4xl text-neutral-500" />
-                            Baby Doe
-                        </td>
-                        <td className="p-2">12fd4321</td>
-                        <td className="p-2">S101</td>
-                        <td className="p-2">STUDENT</td>
-                        <td className="p-2">2022-11-19</td>
-                        <td className="p-2">12:12:52</td>
-                    </tr>
-
+                    {enrolled.map((user) => (
+                        <tr key={user._id} className="odd:bg-neutral-50">
+                            <td className="wd-full-name p-2 text-nowrap">
+                                <FaUserCircle className="me-2 inline align-middle text-3xl text-neutral-500" />
+                                <span className="wd-first-name">{user.firstName}</span>{" "}
+                                <span className="wd-last-name">{user.lastName}</span>
+                            </td>
+                            <td className="wd-login-id p-2">{user.loginId}</td>
+                            <td className="wd-section p-2">{user.section}</td>
+                            <td className="wd-role p-2">{user.role}</td>
+                            <td className="wd-last-activity p-2">{user.lastActivity}</td>
+                            <td className="wd-total-activity p-2">{user.totalActivity}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

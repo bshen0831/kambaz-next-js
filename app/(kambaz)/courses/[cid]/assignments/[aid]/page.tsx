@@ -1,7 +1,14 @@
-"use client";
+import Link from "next/link";
+import * as db from "../../../../database";
 
-export default function AssignmentEditor() {
 
+export default async function AssignmentEditor({
+    params,
+}: {
+    params: Promise<{ cid: string; aid: string }>;
+}) {
+    const { cid, aid } = await params;
+    const assignment = db.assignments.find((a) => a._id === aid);
 
     return (
         <div id="wd-assignments-editor" className="max-w-2xl mx-auto p-6">
@@ -14,11 +21,17 @@ export default function AssignmentEditor() {
                     <input
                         id="wd-name"
                         type="text"
-                        defaultValue="A1 - ENV + HTML"
+                        defaultValue={assignment?.title ?? ""}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
                     />
                 </div>
 
+                <div className="space-y-2">
+                    <label className="block text-sm font-medium">Assignment Id</label>
+                    <div className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
+                        {aid}
+                    </div>
+                </div>
 
                 <div className="space-y-2">
                     <label htmlFor="wd-description" className="block text-sm font-medium ">
@@ -26,7 +39,7 @@ export default function AssignmentEditor() {
                     </label>
                     <textarea
                         id="wd-description"
-                        defaultValue="The assignment is available online Submit a link to the landing page of"
+                        defaultValue={assignment?.description ?? ""}
                         rows={4}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
                     />
@@ -40,7 +53,7 @@ export default function AssignmentEditor() {
                     <input
                         id="wd-points"
                         type="number"
-                        defaultValue={100}
+                        defaultValue={assignment?.points ?? 100}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
                     />
                 </div>
@@ -174,6 +187,7 @@ export default function AssignmentEditor() {
                         type="date"
                         id="wd-due-date"
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+                        defaultValue={assignment?.due}
                     />
                 </div>
 
@@ -186,6 +200,7 @@ export default function AssignmentEditor() {
                         type="date"
                         id="wd-available-from"
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+                        defaultValue={assignment?.available}
                     />
                 </div>
 
@@ -214,14 +229,12 @@ export default function AssignmentEditor() {
                 </div>
 
             </form>
-            <form action="./" method="get" className="flex gap-3 pt-6 border-t border-gray-200">
-                <button id="wd-cancel" className="px-4 py-2 bg-gray-200  rounded-md  font-medium ">
-                    Cancel
-                </button>
-                <button id="wd-save" className="px-4 py-2 bg-blue-600 text-white rounded-md  font-medium ">
-                    Save
-                </button>
-            </form>
+            <Link href={`/courses/${cid}/assignments`} id="wd-cancel">
+                Cancel
+            </Link>{" "}
+            <Link href={`/courses/${cid}/assignments`} id="wd-save">
+                Save
+            </Link>
         </div>
     );
 }
