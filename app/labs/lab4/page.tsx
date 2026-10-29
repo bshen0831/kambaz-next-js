@@ -10,6 +10,10 @@ import DateStateVariable from "./DateStateVariable"
 import ObjectStateVariable from "./ObjectStateVariable"
 import ArrayStateVariable from "./ArrayStateVariable"
 import ProfileForm from "./profile/ProfileForm"
+import ParentStateComponent from "./ParentStateComponent"
+import PropDrilling from "./PropDrilling"
+import UrlEncoding from "./UrlEncoding"
+import ContextExamples from "./context/ContextExamples"
 const name = () => {
     alert("My name is Brian Shen");
 };
@@ -34,6 +38,10 @@ export default function Lab4() {
             <ObjectStateVariable />
             <ArrayStateVariable />
             <ProfileForm />
+            <ParentStateComponent />
+            <PropDrilling />
+            <UrlEncoding />
+            <ContextExamples />
 
             <hr />
         </div>
