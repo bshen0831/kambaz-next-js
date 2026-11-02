@@ -1,39 +1,66 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAccountContext } from "../AccountContext";
 
 export default function Signup() {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const { setCurrentUser } = useAccountContext();
+    const router = useRouter();
+
+    const signup = () => {
+        if (!username || !password) return;
+        setCurrentUser({
+            _id: crypto.randomUUID(),
+            username,
+            password,
+            firstName: "",
+            lastName: "",
+            email: "",
+            role: "STUDENT",
+            loginId: "",
+            section: "",
+            lastActivity: "",
+            totalActivity: "",
+        });
+        router.push("/account/profile");
+    };
+
     return (
-        <div id="wd-signup-screen"
-            className="max-w-sm">
-            <h3>Sign Up</h3>
+        <div id="wd-signup-screen" className="max-w-sm">
+            <h3>Sign up</h3>
             <input
                 id="wd-username"
                 placeholder="Username"
-                className="wd-username mb-2 w-full rounded border border-neutral-300 px-3 py-2"
+                className="mb-2 w-full rounded border border-neutral-300 px-3 py-2"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
             />
-            <br />
             <input
+                id="wd-password"
                 placeholder="Password"
+                className="mb-2 w-full rounded border border-neutral-300 px-3 py-2"
                 type="password"
-                className="wd-password  mb-2 w-full rounded border border-neutral-300 px-3 py-2"
-                defaultValue=""
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
             />
-            <br />
-            <input
-                placeholder="Verify Password"
-                type="password"
-                className="wd-password-verify mb-2 w-full rounded border border-neutral-300 px-3 py-2"
-            />
+            <button
+                type="button"
+                onClick={signup}
+                id="wd-signup-btn"
+                className="mb-2 block w-full rounded bg-blue-600 px-3 py-2 text-center text-white"
+            >
+                Sign up
+            </button>
             <Link
-                id="wd-signin-btn"
                 href="/account/signin"
-                className="mb-2 block w-full rounded bg-blue-600 px-3 py-2 text-center text-white no-underline"
+                id="wd-signin-link"
+                className="block text-blue-600"
             >
                 Sign in
-            </Link>
-            <Link id="wd-signup-link"
-                href="/account/profile"
-                className="mb-2 block w-full rounded bg-gray-600 px-3 py-2 text-center text-white no-underline">
-                Sign up
             </Link>
         </div>
     );
