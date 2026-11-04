@@ -1,14 +1,15 @@
+"use client";
+
 import Link from "next/link";
-import * as db from "../../../../database";
+import { useParams } from "next/navigation";
+import { useAssignmentsStore } from "../../../../store/assignmentsStore";
 
 
-export default async function AssignmentEditor({
-    params,
-}: {
-    params: Promise<{ cid: string; aid: string }>;
-}) {
-    const { cid, aid } = await params;
-    const assignment = db.assignments.find((a) => a._id === aid);
+export default function AssignmentEditor() {
+    const { cid, aid } = useParams<{ cid: string; aid: string }>();
+    const assignment = useAssignmentsStore((state) =>
+        state.assignments.find((a) => a._id === aid),
+    );
 
     return (
         <div id="wd-assignments-editor" className="max-w-2xl mx-auto p-6">

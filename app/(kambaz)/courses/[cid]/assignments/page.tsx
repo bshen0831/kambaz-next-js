@@ -1,13 +1,28 @@
+"use client";
+
 import "@/app/labs/lab2/tailwind/utilities.css";
 import { FaPlus, FaSearch } from "react-icons/fa";
+import { useParams, useRouter } from "next/navigation";
 import AssignmentItem from "./AssignmentItem";
-import * as db from "@/app/(kambaz)/database";
-export default async function Assignments({
-    params,
-}: {
-    params: Promise<{ cid: string }>;
-}) {
-    const { cid } = await params;
+import { useAssignmentsStore } from "../../../store/assignmentsStore";
+export default function Assignments() {
+    const { cid } = useParams<{ cid: string }>();
+    const router = useRouter();
+    const assignments = useAssignmentsStore((state) => state.assignments).filter(
+        (assignment) => assignment.course === cid
+    );
+    const addAssignment = useAssignmentsStore((state) => state.addAssignment);
+    const handleAddAssignment = () => {
+        const aid = addAssignment({
+            title: "New Assignment",
+            course: cid,
+            description: "",
+            points: 100,
+            due: "",
+            available: "",
+        });
+        router.push(`/courses/${cid}/assignments/${aid}`);
+    };
     return (
         <div id="wd-assignments">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
@@ -30,6 +45,7 @@ export default async function Assignments({
                     <button
                         id="wd-add-assignment"
                         type="button"
+                        onClick={handleAddAssignment}
                         className="inline-flex items-center gap-1 rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white"
                     >
                         <FaPlus /> Assignment
@@ -47,8 +63,7 @@ export default async function Assignments({
             </h3>
 
             <ul id="wd-assignment-list" className="m-0 list-none p-0">
-                {db.assignments?.map((assignment) => (
-                    cid == assignment.course &&
+                {assignments.map((assignment) => (
                     <AssignmentItem
                         key={assignment._id}
                         cid={cid}
