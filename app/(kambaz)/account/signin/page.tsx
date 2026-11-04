@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useUsersStore } from "../../store/usersStore";
+import * as db from "../../database";
 import { useAccountContext } from "../AccountContext";
 
 export default function Signin() {
@@ -11,12 +11,11 @@ export default function Signin() {
         username: "",
         password: "",
     });
-    const users = useUsersStore((state) => state.users);
     const { setCurrentUser } = useAccountContext();
     const router = useRouter();
 
     const signin = () => {
-        const user = users.find(
+        const user = db.users.find(
             (u) =>
                 u.username === credentials.username &&
                 u.password === credentials.password,
