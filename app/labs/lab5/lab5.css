@@ -1,0 +1,4 @@
+/* Tailwind for Lab 5 only: theme + utilities, without the preflight reset */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
