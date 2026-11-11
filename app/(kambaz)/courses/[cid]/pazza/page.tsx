@@ -20,7 +20,7 @@ function countResponses(role: Role) {
 export default function ClassAtAGlance() {
     const { cid } = useParams<{ cid: string }>();
 
-    const unreadPosts = 2; // skeleton: fixed number, later computed from who has viewed each post
+    const unreadPosts: number = 2; // skeleton: fixed number, later computed from who has viewed each post
     const unansweredPosts = POSTS.filter(
         (post) =>
             post.type === "QUESTION" &&
