@@ -9,7 +9,7 @@ export default function CourseNavigation({ cid }: { cid: string }) {
     const home = `/courses/${cid}/home`;
     const assignments = `/courses/${cid}/assignments`;
     const modules = `/courses/${cid}/modules`;
-    const piazza = `/courses/${cid}/piazza`;
+    const pazza = `/courses/${cid}/pazza`;
     const zoom = `/courses/${cid}/zoom`;
     const quizzes = `/courses/${cid}/quizzes`;
     const grades = `/courses/${cid}/grades`;
@@ -50,15 +50,15 @@ export default function CourseNavigation({ cid }: { cid: string }) {
                 Modules
             </Link>
             <Link
-                href={piazza}
-                id="wd-course-piazza-link"
+                href={pazza}
+                id="wd-course-pazza-link"
                 className={
-                    pathname === piazza || pathname.startsWith(assignments + "/")
+                    pathname === pazza || pathname.startsWith(pazza + "/")
                         ? "list-group-item active border-0"
                         : "list-group-item border-0 text-red-600"
                 }
             >
-                Piazza
+                Pazza
             </Link>
             <Link
                 href={zoom}
