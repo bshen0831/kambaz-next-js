@@ -3,26 +3,26 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import * as db from "../../database";
+import * as client from "../client";
 import { useAccountContext } from "../AccountContext";
 
 export default function Signin() {
+
     const [credentials, setCredentials] = useState({
         username: "",
         password: "",
     });
-    const { setCurrentUser } = useAccountContext();
     const router = useRouter();
-
-    const signin = () => {
-        const user = db.users.find(
-            (u) =>
-                u.username === credentials.username &&
-                u.password === credentials.password,
-        );
-        if (!user) return;
-        setCurrentUser(user);
-        router.push("/dashboard");
+    const { setCurrentUser } = useAccountContext();
+    const signin = async () => {
+        try {
+            const user = await client.signin(credentials);
+            if (!user) return;
+            setCurrentUser(user);
+            router.push("/account/profile");
+        } catch (error) {
+            console.error("Sign in failed", error);
+        }
     };
 
     return (
