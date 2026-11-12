@@ -3,14 +3,22 @@ import { useState, useEffect } from "react";
 import * as client from "./client";
 import { FaPlusCircle, FaTrash, FaPencilAlt } from "react-icons/fa";
 import { TiDelete } from "react-icons/ti";
-import { Todo } from "../lab4/zustand/todoStore";
+
+
+type Todo = {
+    id: number;
+    title: string;
+    completed: boolean;
+    description?: string;
+    editing?: boolean;
+};
 
 export default function WorkingWithRemoteArraysAsync() {
-    const [todos, setTodos] = useState([{ id: 1, title: "Task 1", completed: false, description: "This is task 1" }]);
+    const [todos, setTodos] = useState<Todo[]>([{ id: 1, title: "Task 1", completed: false, description: "This is task 1" }]);
     const fetchTodos = async () => {
         setTodos(await client.fetchTodos());
     };
-    const removeTodo = async (todo) => {
+    const removeTodo = async (todo: Todo) => {
         setTodos(await client.removeTodo(todo));
     };
     const createNewTodo = async () => {
@@ -24,7 +32,7 @@ export default function WorkingWithRemoteArraysAsync() {
         setTodos([...todos, newTodo]);
     };
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const deleteTodo = async (todo) => {
+    const deleteTodo = async (todo: Todo) => {
         try {
             await client.deleteTodo(todo);
             setTodos(todos.filter((t) => t.id !== todo.id));
@@ -33,10 +41,10 @@ export default function WorkingWithRemoteArraysAsync() {
             setErrorMessage(e.response?.data?.message ?? "Something went wrong");
         }
     };
-    const editTodo = (todo) => {
+    const editTodo = (todo: Todo) => {
         setTodos(todos.map((t) => (t.id === todo.id ? { ...todo, editing: true } : t)));
     };
-    const updateTodo = async (todo) => {
+    const updateTodo = async (todo: Todo) => {
         await client.updateTodo(todo);
         setTodos(todos.map((t) => (t.id === todo.id ? todo : t)));
     };
