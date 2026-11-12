@@ -2,17 +2,6 @@
    Pazza styles - all class names start with "wd-pazza-"
    ========================================================= */
 
-/* ---------- Debug: dashed outlines to see each box ----------
-   Delete this block once the layout is finished. */
-.wd-pazza-navbar,
-.wd-pazza-folder-filters,
-.wd-pazza-lops,
-.wd-pazza-post-screen,
-.wd-pazza-manage-class {
-  outline: 1px dashed #999;
-  padding: 8px;
-}
-
 /* ---------- Layout (next steps) ---------- */
 /* TODO 1: PNB and FF stay fixed at the top */
 /* ---------- 1. PNB and FF stay fixed at the top ---------- */
@@ -49,6 +38,7 @@
 .wd-pazza-post-screen {
     flex: 1;                   /* take all the remaining width */
     min-width: 0;              /* allow PS to shrink instead of overflowing */
+    padding: 12px;
 }
 
 /* TODO 3: LOPS scrolls on its own */
@@ -59,6 +49,7 @@
     top: 88px;                     /* below PNB + FF: 48px + 40px */
     height: calc(100vh - 88px);    /* fill the rest of the window height */
     overflow-y: auto;              /* if the posts don't fit, scroll inside LOPS */
+    padding: 12px;
 }
 
 
@@ -541,4 +532,241 @@
 .wd-pazza-user {
     margin-left: auto;         /* push the user name to the far right */
     font-weight: 600;
+}
+
+/* ---------- 12. New Post screen ---------- */
+.wd-pazza-form {
+    max-width: 900px;
+}
+
+.wd-pazza-form-title {
+    margin: 0 0 8px;
+    font-size: 20px;
+}
+
+.wd-pazza-form-row {           /* label column on the left, field on the right */
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.wd-pazza-form-label {
+    padding-top: 4px;
+    font-weight: bold;
+}
+
+.wd-pazza-form-field {
+    min-width: 0;
+}
+
+/* Post Type: radio buttons that look like tabs */
+.wd-pazza-post-type-tabs {
+    display: flex;
+}
+
+.wd-pazza-post-type-tab {
+    padding: 6px 16px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.wd-pazza-post-type-tab + .wd-pazza-post-type-tab {
+    margin-left: -1px;         /* the two tabs share one border line */
+}
+
+.wd-pazza-post-type-tab:has(input:checked) {          /* selected tab */
+    background-color: #3e7aab;
+    border-color: #3e7aab;
+    color: white;
+    font-weight: bold;
+}
+
+.wd-pazza-post-type-tab:has(input:focus-visible) {    /* keyboard focus */
+    outline: 2px solid #3e7aab;
+    outline-offset: 2px;
+}
+
+/* Post To */
+.wd-pazza-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-right: 16px;
+}
+
+.wd-pazza-post-to-users {      /* hidden until "Individual" is selected */
+    display: none;
+    margin-top: 8px;
+}
+
+.wd-pazza-form-row:has(input[value="INDIVIDUAL"]:checked) .wd-pazza-post-to-users {
+    display: block;
+}
+
+.wd-pazza-select {
+    width: 100%;
+    max-width: 360px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font: inherit;
+}
+
+/* Select Folders */
+.wd-pazza-folder-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.wd-pazza-folder-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.wd-pazza-folder-option:has(input:checked) {          /* checked folder */
+    background-color: #d9e8f5;
+    border-color: #3e7aab;
+}
+
+.wd-pazza-link {
+    display: inline-block;
+    margin-top: 8px;
+    color: #3e7aab;
+}
+
+/* Summary / errors */
+.wd-pazza-input {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font: inherit;
+}
+
+.wd-pazza-error {
+    margin: 4px 0 0;
+    color: #c00;
+    font-size: 12px;
+}
+
+/* Buttons */
+.wd-pazza-form-buttons {
+    display: flex;
+    gap: 8px;
+    padding-top: 16px;
+}
+
+.wd-pazza-secondary-btn {
+    margin-top: 8px;           /* same as .wd-pazza-primary-btn so they line up */
+    padding: 6px 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    color: #333;
+    text-decoration: none;
+}
+
+/* The button text follows the post type */
+.wd-pazza-post-note-label {
+    display: none;
+}
+
+.wd-pazza-form:has(input[value="NOTE"]:checked) .wd-pazza-post-question-label {
+    display: none;
+}
+
+.wd-pazza-form:has(input[value="NOTE"]:checked) .wd-pazza-post-note-label {
+    display: inline;
+}
+/* ---------- 13. Manage Class / Manage Folders ---------- */
+.wd-pazza-mcs {
+    max-width: 700px;
+}
+
+.wd-pazza-mcs-tabs {
+    display: flex;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #ccc;
+}
+
+.wd-pazza-mcs-tab {
+    margin-bottom: -1px;       /* sit on top of the bottom line */
+    padding: 8px 16px;
+    border: 1px solid transparent;
+}
+
+.wd-pazza-mcs-tab.wd-active {  /* selected tab: looks connected to the page below */
+    border-color: #ccc #ccc white;
+    background-color: white;
+    color: #3e7aab;
+    font-weight: bold;
+}
+
+.wd-pazza-add-folder {         /* input + Add Folder button in one row */
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.wd-pazza-add-folder .wd-pazza-input {
+    flex: 1;
+}
+
+.wd-pazza-folder-list {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.wd-pazza-folder-row {         /* checkbox, name (or input), buttons */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.wd-pazza-folder-row:last-child {
+    border-bottom: none;
+}
+
+.wd-pazza-folder-name {
+    flex: 1;                   /* push the buttons to the right */
+}
+
+.wd-pazza-folder-name-input {
+    flex: 1;
+    width: auto;
+}
+
+/* Buttons that sit in a row don't need the top margin */
+.wd-pazza-add-folder .wd-pazza-primary-btn,
+.wd-pazza-folder-row .wd-pazza-primary-btn,
+.wd-pazza-folder-row .wd-pazza-secondary-btn {
+    margin-top: 0;
+}
+
+button.wd-pazza-secondary-btn {    /* the same style is also used on <Link> */
+    font: inherit;
+    cursor: pointer;
+}
+
+.wd-pazza-danger-btn {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 4px;
+    background-color: #c62828;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
 }
