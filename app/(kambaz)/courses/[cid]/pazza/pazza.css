@@ -33,11 +33,6 @@
     background-color: #f2f2f2;
 }
 
-/* Temporary: make the page tall enough to test scrolling. Delete after testing. */
-.wd-pazza-post-screen {
-    min-height: 200vh;
-}
-
 /* TODO 2: LOPS on the left, PS on the right */
 /* ---------- 2. LOPS on the left, PS on the right ---------- */
 .wd-pazza-qa-body {
@@ -58,21 +53,14 @@
 
 /* TODO 3: LOPS scrolls on its own */
 /* ---------- 2. LOPS on the left, PS on the right ---------- */
-.wd-pazza-qa-body {
-    display: flex;             /* children (LOPS and PS) sit side by side */
-}
-
+/* ---------- 3. LOPS scrolls on its own ---------- */
 .wd-pazza-lops {
-    width: 300px;              /* fixed width for the list of posts */
-    flex-shrink: 0;            /* never squeeze the LOPS narrower than 300px */
-    background-color: #fafafa;
-    border-right: 1px solid #ddd;
+    position: sticky;              /* LOPS stays put while the page (PS) scrolls */
+    top: 88px;                     /* below PNB + FF: 48px + 40px */
+    height: calc(100vh - 88px);    /* fill the rest of the window height */
+    overflow-y: auto;              /* if the posts don't fit, scroll inside LOPS */
 }
 
-.wd-pazza-post-screen {
-    flex: 1;                   /* take all the remaining width */
-    min-width: 0;              /* allow PS to shrink instead of overflowing */
-}
 
 /* ---------- 5. FF content ---------- */
 .wd-pazza-folder-filters {
@@ -516,4 +504,41 @@
     margin: 0;
     font-weight: bold;
     text-align: right;
+}
+
+/* ---------- 4. PNB content ---------- */
+.wd-pazza-navbar {
+    display: flex;             /* logo, course, tabs and user in one row */
+    align-items: center;       /* vertically centered */
+    gap: 24px;                 /* space between the items */
+    padding: 0 16px;
+}
+
+.wd-pazza-logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: none;
+}
+
+.wd-pazza-course {
+    font-weight: 600;
+}
+
+.wd-pazza-tab {
+    color: white;
+    text-decoration: none;
+    padding: 4px 8px;
+    border-bottom: 3px solid transparent;
+}
+
+.wd-pazza-tab.wd-active {      /* highlighted tab: bold + white underline */
+    font-weight: bold;
+    border-bottom-color: white;
+}
+
+.wd-pazza-user {
+    margin-left: auto;         /* push the user name to the far right */
+    font-weight: 600;
 }
