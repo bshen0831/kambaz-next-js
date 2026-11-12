@@ -6,6 +6,7 @@ import WorkingWithRemoteArrays from "./WorkingWithRemoteArrays";
 import HttpClient from "./HttpClient";
 import WorkingWithRemoteObjectsAsync from "./WorkingWithRemoteObjectsAsync";
 import WorkingWithRemoteArraysAsync from "./WorkingWithRemoteArraysAsync";
+import Calculator from "./Calculator";
 export default function Lab5() {
     return (
         <div id="wd-lab5">
@@ -18,6 +19,7 @@ export default function Lab5() {
             <HttpClient />
             <WorkingWithRemoteObjectsAsync />
             <WorkingWithRemoteArraysAsync />
+            <Calculator />
 
         </div>
     );
