@@ -5,10 +5,11 @@ import { useModulesStore } from "../../../store/modulesStore";
 
 export default function ModuleControlButtons({
     moduleId,
+    onRemoveModule,
 }: {
     moduleId: string;
+    onRemoveModule: (moduleId: string) => Promise<void>;
 }) {
-    const deleteModule = useModulesStore((state) => state.deleteModule);
     const editModule = useModulesStore((state) => state.editModule);
     return (
         <div className="flex items-center gap-2">
@@ -19,7 +20,7 @@ export default function ModuleControlButtons({
             />
             <FaTrash
                 className="cursor-pointer text-red-600"
-                onClick={() => deleteModule(moduleId)}
+                onClick={() => onRemoveModule(moduleId)}
                 title="Delete module"
             />
             <FaCheckCircle className="text-green-600" />
