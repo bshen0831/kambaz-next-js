@@ -1,9 +1,18 @@
 "use client";
 
 import { create } from "zustand";
-import coursesJson from "../database/courses.json";
-
-export type Course = (typeof coursesJson)[number];
+export type Course = {
+  _id: string;
+  name: string;
+  number: string;
+  startDate: string;
+  endDate: string;
+  department: string;
+  credits: number;
+  description: string;
+  image: string;
+  term: string;
+};
 
 const emptyCourse: Course = {
   _id: "0",
@@ -23,10 +32,11 @@ type CoursesStore = {
   addCourse: (course: Course) => void;
   deleteCourse: (courseId: string) => void;
   updateCourse: (course: Course) => void;
+  setCourses: (courses: Course[]) => void;
 };
 
 export const useCoursesStore = create<CoursesStore>((set) => ({
-  courses: coursesJson,
+  courses: [],
   addCourse: (course) =>
     set((state) => ({
       courses: [
@@ -34,6 +44,7 @@ export const useCoursesStore = create<CoursesStore>((set) => ({
         { ...emptyCourse, ...course, _id: crypto.randomUUID() },
       ],
     })),
+  setCourses: (courses) => set({ courses }),
   deleteCourse: (courseId) =>
     set((state) => ({
       courses: state.courses.filter((course) => course._id !== courseId),
