@@ -3,26 +3,37 @@
 import "@/app/labs/lab2/tailwind/utilities.css";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import { useParams, useRouter } from "next/navigation";
+import { useEffect } from "react";
 import AssignmentItem from "./AssignmentItem";
 import { useAssignmentsStore } from "../../../store/assignmentsStore";
+import * as client from "../../client";
+
 export default function Assignments() {
     const { cid } = useParams<{ cid: string }>();
     const router = useRouter();
     const assignments = useAssignmentsStore((state) => state.assignments).filter(
-        (assignment) => assignment.course === cid
+        (assignment) => assignment.course === cid,
     );
-    const addAssignment = useAssignmentsStore((state) => state.addAssignment);
-    const handleAddAssignment = () => {
-        const aid = addAssignment({
-            title: "New Assignment",
-            course: cid,
-            description: "",
-            points: 100,
-            due: "",
-            available: "",
-        });
-        router.push(`/courses/${cid}/assignments/${aid}`);
+    const setAssignments = useAssignmentsStore((state) => state.setAssignments);
+    const deleteAssignment = useAssignmentsStore((state) => state.deleteAssignment);
+
+    useEffect(() => {
+        const load = async () => {
+            setAssignments(await client.findAssignmentsForCourse(cid));
+        };
+        load();
+    }, [cid, setAssignments]);
+
+    // New assignments are created on the server when the editor is saved
+    const onAddAssignment = () => {
+        router.push(`/courses/${cid}/assignments/new`);
     };
+
+    const onDeleteAssignment = async (assignmentId: string) => {
+        await client.deleteAssignment(assignmentId);
+        deleteAssignment(assignmentId);
+    };
+
     return (
         <div id="wd-assignments">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
@@ -45,7 +56,7 @@ export default function Assignments() {
                     <button
                         id="wd-add-assignment"
                         type="button"
-                        onClick={handleAddAssignment}
+                        onClick={onAddAssignment}
                         className="inline-flex items-center gap-1 rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white"
                     >
                         <FaPlus /> Assignment
@@ -70,10 +81,10 @@ export default function Assignments() {
                         aid={assignment._id}
                         title={assignment.title}
                         details={`Multiple Modules | Not available until ${assignment.available} | Due ${assignment.due} | ${assignment.points} pts`}
+                        onDelete={onDeleteAssignment}
                     />
                 ))}
             </ul>
-
         </div>
     );
 }

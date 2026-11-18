@@ -9,6 +9,8 @@ import {
 } from "../store/coursesStore";
 import * as client from "../courses/client";
 import { useAccountContext } from "../account/AccountContext";
+import { useEnrollmentsStore } from "../store/enrollmentsStore";
+import * as enrollmentsClient from "../enrollments/client";
 
 
 export default function Dashboard() {
@@ -18,13 +20,40 @@ export default function Dashboard() {
     const { currentUser } = useAccountContext();
     const [course, setCourse] = useState<Course>(emptyCourse);
     const setCourses = useCoursesStore((state) => state.setCourses);
+    const enrollments = useEnrollmentsStore((state) => state.enrollments);
+    const setEnrollments = useEnrollmentsStore((state) => state.setEnrollments);
+    const enroll = useEnrollmentsStore((state) => state.enroll);
+    const unenroll = useEnrollmentsStore((state) => state.unenroll);
+    const [showAllCourses, setShowAllCourses] = useState(false);
 
     useEffect(() => {
         const load = async () => {
-            setCourses(await client.findMyCourses());
+            setCourses(
+                showAllCourses
+                    ? await client.fetchAllCourses()
+                    : await client.findMyCourses(),
+            );
+            setEnrollments(await enrollmentsClient.findEnrollmentsForUser("current"));
         };
         load();
-    }, [currentUser]);
+    }, [currentUser, showAllCourses, setCourses, setEnrollments]);
+
+    const isEnrolled = (courseId: string) =>
+        enrollments.some(
+            (e) => e.user === currentUser?._id && e.course === courseId,
+        );
+    const onEnroll = async (courseId: string) => {
+        if (!currentUser) return;
+        enroll(await enrollmentsClient.enrollIntoCourse(currentUser._id, courseId));
+    };
+    const onUnenroll = async (courseId: string) => {
+        if (!currentUser) return;
+        await enrollmentsClient.unenrollFromCourse(currentUser._id, courseId);
+        unenroll(currentUser._id, courseId);
+        if (!showAllCourses) {
+            setCourses(courses.filter((c) => c._id !== courseId));
+        }
+    };
     const onAddCourse = async () => {
         const newCourse = await client.createCourse(course);
         addCourse(newCourse);
@@ -87,7 +116,19 @@ export default function Dashboard() {
                 id="wd-course-start-date"
             />
             <hr />
-            <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+                <h2 id="wd-dashboard-published">
+                    {showAllCourses ? "All Courses" : "My Courses"} ({courses.length})
+                </h2>
+                <button
+                    type="button"
+                    className="rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white"
+                    id="wd-enrollments-toggle"
+                    onClick={() => setShowAllCourses(!showAllCourses)}
+                >
+                    {showAllCourses ? "Show My Courses" : "Enrollments"}
+                </button>
+            </div>
             <hr />
             <div
                 id="wd-dashboard-courses"
@@ -98,6 +139,9 @@ export default function Dashboard() {
                         key={c._id}
                         course={c}
                         onEdit={() => setCourse(c)}
+                        enrolled={isEnrolled(c._id)}
+                        onEnroll={onEnroll}
+                        onUnenroll={onUnenroll}
                     />
                 ))}
             </div>

@@ -5,9 +5,15 @@ import * as client from "../courses/client";
 export default function CourseCard({
     course,
     onEdit,
+    enrolled,
+    onEnroll,
+    onUnenroll,
 }: {
     course: Course;
     onEdit: () => void;
+    enrolled: boolean;
+    onEnroll: (courseId: string) => Promise<void>;
+    onUnenroll: (courseId: string) => Promise<void>;
 }) {
     const deleteCourse = useCoursesStore((state) => state.deleteCourse);
     const onDeleteCourse = async (courseId: string) => {
@@ -61,6 +67,20 @@ export default function CourseCard({
                         }}
                     >
                         Delete
+                    </button>
+                    <button
+                        type="button"
+                        id="wd-enrollment-click"
+                        className={`mt-2 block w-full rounded px-3 py-1.5 text-sm font-medium text-white ${
+                            enrolled ? "bg-red-600" : "bg-green-600"
+                        }`}
+                        onClick={(event) => {
+                            event.preventDefault();
+                            if (enrolled) onUnenroll(course._id);
+                            else onEnroll(course._id);
+                        }}
+                    >
+                        {enrolled ? "Unenroll" : "Enroll"}
                     </button>
                 </div>
             </Link>

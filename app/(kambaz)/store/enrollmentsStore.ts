@@ -1,31 +1,30 @@
 "use client";
 
 import { create } from "zustand";
-import enrollmentsJson from "../database/enrollments.json";
 
-export type Enrollment = (typeof enrollmentsJson)[number];
+export type Enrollment = {
+  _id: string;
+  user: string;
+  course: string;
+};
 
 type EnrollmentsStore = {
   enrollments: Enrollment[];
-  enroll: (userId: string, courseId: string) => void;
+  setEnrollments: (enrollments: Enrollment[]) => void;
+  enroll: (enrollment: Enrollment) => void;
   unenroll: (userId: string, courseId: string) => void;
 };
 
 export const useEnrollmentsStore = create<EnrollmentsStore>((set) => ({
-  enrollments: enrollmentsJson,
-  enroll: (userId, courseId) =>
-    set((state) => {
-      const alreadyEnrolled = state.enrollments.some(
-        (e) => e.user === userId && e.course === courseId,
-      );
-      if (alreadyEnrolled) return state;
-      return {
-        enrollments: [
-          ...state.enrollments,
-          { _id: crypto.randomUUID(), user: userId, course: courseId },
-        ],
-      };
-    }),
+  enrollments: [],
+  setEnrollments: (enrollments) => set({ enrollments }),
+  enroll: (enrollment) =>
+    set((state) => ({
+      enrollments: [
+        ...state.enrollments.filter((e) => e._id !== enrollment._id),
+        enrollment,
+      ],
+    })),
   unenroll: (userId, courseId) =>
     set((state) => ({
       enrollments: state.enrollments.filter(

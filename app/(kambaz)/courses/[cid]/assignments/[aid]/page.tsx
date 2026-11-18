@@ -1,15 +1,73 @@
 "use client";
 
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { useAssignmentsStore } from "../../../../store/assignmentsStore";
-
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import {
+    useAssignmentsStore,
+    type Assignment,
+} from "../../../../store/assignmentsStore";
+import * as client from "../../../client";
 
 export default function AssignmentEditor() {
     const { cid, aid } = useParams<{ cid: string; aid: string }>();
+    const isNew = aid === "new";
     const assignment = useAssignmentsStore((state) =>
         state.assignments.find((a) => a._id === aid),
     );
+    const setAssignments = useAssignmentsStore((state) => state.setAssignments);
+    const [loaded, setLoaded] = useState(false);
+
+    // Opening the editor directly (e.g. a refresh) leaves the store empty,
+    // so fetch this course's assignments from the server.
+    useEffect(() => {
+        if (isNew || assignment) return;
+        const load = async () => {
+            setAssignments(await client.findAssignmentsForCourse(cid));
+            setLoaded(true);
+        };
+        load();
+    }, [cid, isNew, assignment, setAssignments]);
+
+    if (!isNew && !assignment) {
+        return <div className="p-6">{loaded ? "Assignment not found." : "Loading..."}</div>;
+    }
+    const initial: Assignment = assignment ?? {
+        _id: "new",
+        title: "New Assignment",
+        course: cid,
+        description: "",
+        points: 100,
+        due: "",
+        available: "",
+    };
+    return <AssignmentForm key={aid} cid={cid} isNew={isNew} initial={initial} />;
+}
+
+function AssignmentForm({
+    cid,
+    isNew,
+    initial,
+}: {
+    cid: string;
+    isNew: boolean;
+    initial: Assignment;
+}) {
+    const router = useRouter();
+    const [assignment, setAssignment] = useState<Assignment>(initial);
+    const addAssignment = useAssignmentsStore((state) => state.addAssignment);
+    const updateAssignment = useAssignmentsStore((state) => state.updateAssignment);
+
+    const onSave = async () => {
+        if (isNew) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { _id, ...newAssignment } = assignment;
+            addAssignment(await client.createAssignmentForCourse(cid, newAssignment));
+        } else {
+            updateAssignment(await client.updateAssignment(assignment));
+        }
+        router.push(`/courses/${cid}/assignments`);
+    };
 
     return (
         <div id="wd-assignments-editor" className="max-w-2xl mx-auto p-6">
@@ -22,7 +80,8 @@ export default function AssignmentEditor() {
                     <input
                         id="wd-name"
                         type="text"
-                        defaultValue={assignment?.title ?? ""}
+                        value={assignment.title}
+                        onChange={(e) => setAssignment({ ...assignment, title: e.target.value })}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
                     />
                 </div>
@@ -30,7 +89,7 @@ export default function AssignmentEditor() {
                 <div className="space-y-2">
                     <label className="block text-sm font-medium">Assignment Id</label>
                     <div className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
-                        {aid}
+                        {isNew ? "(assigned on save)" : assignment._id}
                     </div>
                 </div>
 
@@ -40,7 +99,10 @@ export default function AssignmentEditor() {
                     </label>
                     <textarea
                         id="wd-description"
-                        defaultValue={assignment?.description ?? ""}
+                        value={assignment.description}
+                        onChange={(e) =>
+                            setAssignment({ ...assignment, description: e.target.value })
+                        }
                         rows={4}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
                     />
@@ -54,7 +116,10 @@ export default function AssignmentEditor() {
                     <input
                         id="wd-points"
                         type="number"
-                        defaultValue={assignment?.points ?? 100}
+                        value={assignment.points}
+                        onChange={(e) =>
+                            setAssignment({ ...assignment, points: Number(e.target.value) })
+                        }
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
                     />
                 </div>
@@ -188,7 +253,8 @@ export default function AssignmentEditor() {
                         type="date"
                         id="wd-due-date"
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
-                        defaultValue={assignment?.due}
+                        value={assignment.due}
+                        onChange={(e) => setAssignment({ ...assignment, due: e.target.value })}
                     />
                 </div>
 
@@ -201,7 +267,10 @@ export default function AssignmentEditor() {
                         type="date"
                         id="wd-available-from"
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
-                        defaultValue={assignment?.available}
+                        value={assignment.available}
+                        onChange={(e) =>
+                            setAssignment({ ...assignment, available: e.target.value })
+                        }
                     />
                 </div>
 
@@ -233,9 +302,9 @@ export default function AssignmentEditor() {
             <Link href={`/courses/${cid}/assignments`} id="wd-cancel">
                 Cancel
             </Link>{" "}
-            <Link href={`/courses/${cid}/assignments`} id="wd-save">
+            <button type="button" id="wd-save" onClick={onSave}>
                 Save
-            </Link>
+            </button>
         </div>
     );
 }
