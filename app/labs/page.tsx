@@ -12,8 +12,8 @@ export default function Labs() {
                     </a>
                 </li>
                 <li>
-                    <a href="https://webdev-server-31i9.onrender.com" id="wd-server-link" rel="noopener noreferrer">
-                        Server URL
+                    <a href="https://webdev-server-31i9.onrender.com" id="wd-server" target="_blank" rel="noopener noreferrer">
+                        https://webdev-server-31i9.onrender.com
                     </a>
                 </li>
                 <li>
