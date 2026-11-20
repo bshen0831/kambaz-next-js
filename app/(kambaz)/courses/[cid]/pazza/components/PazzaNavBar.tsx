@@ -4,8 +4,7 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { useCoursesStore } from "../../../../store/coursesStore";
 import { useAccountContext } from "../../../../account/AccountContext";
-
-export const INSTRUCTOR_ROLES = ["FACULTY", "TA", "ADMIN"];
+import { displayName, useCourseAccess } from "../users";
 
 export default function PazzaNavBar() {
     const { cid } = useParams<{ cid: string }>();
@@ -13,10 +12,10 @@ export default function PazzaNavBar() {
     const courses = useCoursesStore((state) => state.courses);
     const course = courses.find((c) => c._id === cid);
     const { currentUser } = useAccountContext();
+    const access = useCourseAccess(cid);
 
     const base = `/courses/${cid}/pazza`;
     const isManageClass = pathname.includes("/manage-class");
-    const isInstructor = INSTRUCTOR_ROLES.includes(currentUser?.role ?? "");
 
     return (
         <nav id="wd-pazza-navbar" className="wd-pazza-navbar">
@@ -36,7 +35,7 @@ export default function PazzaNavBar() {
                 Q &amp; A
             </Link>
 
-            {isInstructor && (
+            {access.instructor && (
                 <Link
                     href={`${base}/manage-class`}
                     id="wd-pazza-manage-class-tab"
@@ -47,7 +46,7 @@ export default function PazzaNavBar() {
             )}
 
             <span id="wd-pazza-user" className="wd-pazza-user">
-                {currentUser ? `${currentUser.firstName} ${currentUser.lastName}` : "Not signed in"}
+                {currentUser ? displayName(currentUser) : "Not signed in"}
             </span>
         </nav>
     );

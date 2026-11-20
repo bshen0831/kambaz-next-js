@@ -596,13 +596,8 @@
     margin-right: 16px;
 }
 
-.wd-pazza-post-to-users {      /* hidden until "Individual" is selected */
-    display: none;
+.wd-pazza-post-to-users {      /* only rendered when "Individual" is selected */
     margin-top: 8px;
-}
-
-.wd-pazza-form-row:has(input[value="INDIVIDUAL"]:checked) .wd-pazza-post-to-users {
-    display: block;
 }
 
 .wd-pazza-select {
@@ -674,18 +669,6 @@
     text-decoration: none;
 }
 
-/* The button text follows the post type */
-.wd-pazza-post-note-label {
-    display: none;
-}
-
-.wd-pazza-form:has(input[value="NOTE"]:checked) .wd-pazza-post-question-label {
-    display: none;
-}
-
-.wd-pazza-form:has(input[value="NOTE"]:checked) .wd-pazza-post-note-label {
-    display: inline;
-}
 /* ---------- 13. Manage Class / Manage Folders ---------- */
 .wd-pazza-mcs {
     max-width: 700px;
@@ -769,4 +752,253 @@ button.wd-pazza-secondary-btn {    /* the same style is also used on <Link> */
     color: white;
     font-weight: bold;
     cursor: pointer;
+}
+
+/* ---------- 14. Interactive state (Zustand) ---------- */
+/* Unread posts in the list: bold summary + blue bar on the left */
+.wd-pazza-post-item.wd-unread {
+    border-left: 3px solid #3e7aab;
+}
+
+.wd-pazza-post-item.wd-unread .wd-pazza-post-item-summary {
+    color: #1d4f7a;
+}
+
+.wd-pazza-private-tag {        /* posts sent to individual people only */
+    display: inline-block;
+    margin: 4px 0 4px 6px;
+    padding: 0 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    background-color: #f3e5f5;
+    color: #6a1b9a;
+}
+
+/* "Showing posts in hw1 · Show all" above the list of posts */
+.wd-pazza-filter-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 8px;
+    font-size: 12px;
+    color: #555;
+}
+
+.wd-pazza-link-btn {           /* a button that looks like a link */
+    margin-left: auto;
+    border: none;
+    background: none;
+    padding: 0;
+    color: #3e7aab;
+    text-decoration: underline;
+    font: inherit;
+    cursor: pointer;
+}
+
+/* Textarea + Submit/Cancel used for answers, discussions, replies */
+.wd-pazza-composer + .wd-pazza-composer,
+.wd-pazza-discussion + .wd-pazza-composer {
+    margin-top: 12px;
+}
+
+.wd-pazza-composer-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.wd-pazza-discussion.wd-resolved {
+    border-color: #a5d6a7;
+}
+
+.wd-pazza-discussion-status label:has(input:disabled) {
+    color: #999;
+}
+
+/* Edit Post form inside the post card */
+.wd-pazza-edit-post {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.wd-pazza-edit-post .wd-pazza-label {
+    margin: 6px 0 0;
+    font-weight: bold;
+}
+
+.wd-pazza-edit-post .wd-pazza-post-type-tabs {
+    margin-bottom: 4px;
+}
+
+/* Manage folders: name field with its error message, disabled buttons */
+.wd-pazza-folder-name-field {
+    flex: 1;
+}
+
+.wd-pazza-add-folder-error {
+    margin: -8px 0 12px;
+}
+
+.wd-pazza-primary-btn:disabled,
+.wd-pazza-secondary-btn:disabled,
+.wd-pazza-danger-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ---------- 15. Rich text: editor and stored content ---------- */
+.wd-pazza-hint {               /* small grey note under a field */
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: #777;
+}
+
+.wd-pazza-rte-box {            /* toolbar + editable area, looks like one input */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.wd-pazza-rte-box:focus-within {
+    border-color: #3e7aab;
+    box-shadow: 0 0 0 2px rgba(62, 122, 171, 0.2);
+}
+
+.wd-pazza-rte-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px;
+    padding: 4px;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #f7f7f7;
+    border-radius: 4px 4px 0 0;
+}
+
+.wd-pazza-rte-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 26px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: transparent;
+    color: #444;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.wd-pazza-rte-btn:hover:not(:disabled) {
+    background-color: #e9e9e9;
+}
+
+.wd-pazza-rte-btn.wd-active {  /* formatting that is on at the cursor */
+    background-color: #d9e8f5;
+    border-color: #3e7aab;
+    color: #1d4f7a;
+}
+
+.wd-pazza-rte-btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.wd-pazza-rte-divider {
+    width: 1px;
+    height: 18px;
+    margin: 0 4px;
+    background-color: #ddd;
+}
+
+.wd-pazza-rte-content {        /* the editable area itself */
+    padding: 8px;
+    outline: none;
+    cursor: text;
+}
+
+/* placeholder text while the editor is empty (TipTap Placeholder extension) */
+.wd-pazza-rte-content p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    color: #999;
+    pointer-events: none;
+}
+
+/* formatting inside both the editor and stored content */
+.wd-pazza-rich-text {
+    white-space: pre-wrap;     /* same as the editor, so spaces look identical */
+    overflow-wrap: anywhere;
+}
+
+.wd-pazza-rich-text > :first-child {
+    margin-top: 0;
+}
+
+.wd-pazza-rich-text > :last-child {
+    margin-bottom: 0;
+}
+
+.wd-pazza-rich-text p {
+    margin: 0 0 8px;
+}
+
+.wd-pazza-rich-text ul,
+.wd-pazza-rich-text ol {
+    margin: 0 0 8px;
+    padding-left: 24px;
+}
+
+.wd-pazza-rich-text ul {
+    list-style: disc;
+}
+
+.wd-pazza-rich-text ol {
+    list-style: decimal;
+}
+
+.wd-pazza-rich-text li > p {
+    margin: 0;
+}
+
+.wd-pazza-rich-text blockquote {
+    margin: 0 0 8px;
+    padding-left: 10px;
+    border-left: 3px solid #ccc;
+    color: #555;
+}
+
+.wd-pazza-rich-text code {
+    padding: 1px 4px;
+    border-radius: 3px;
+    background-color: #f0f0f0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.9em;
+}
+
+.wd-pazza-rich-text pre {
+    margin: 0 0 8px;
+    padding: 8px 10px;
+    border-radius: 4px;
+    background-color: #2b2b2b;
+    color: #f5f5f5;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+.wd-pazza-rich-text pre code {
+    padding: 0;
+    background: none;
+    color: inherit;
+}
+
+.wd-pazza-rich-text a {
+    color: #3e7aab;
+    text-decoration: underline;
+}
+
+.wd-pazza-message .wd-pazza-rich-text {
+    margin-top: 4px;
 }

@@ -1,32 +1,36 @@
 import Link from "next/link";
-import { POSTS } from "../posts";
-
-type Post = (typeof POSTS)[number];
+import type { Post, Role } from "../../../../store/pazzaStore";
+import { htmlToText } from "../html";
+import RoleTag from "./RoleTag";
+import TimeStamp from "./TimeStamp";
 
 export default function PostListItem({
     post,
     cid,
+    authorRole,
     selected,
+    unread,
 }: {
     post: Post;
     cid: string;
+    authorRole: Role;
     selected: boolean;
+    unread: boolean;
 }) {
-    const isInstructor = post.authorRole === "INSTRUCTOR";
     return (
         <li>
             <Link
                 href={`/courses/${cid}/pazza/posts/${post._id}`}
-                className={`wd-pazza-post-item ${selected ? "wd-active" : ""}`}
+                className={`wd-pazza-post-item ${selected ? "wd-active" : ""} ${unread ? "wd-unread" : ""}`}
             >
                 <div className="wd-pazza-post-item-header">
                     <span className="wd-pazza-post-item-summary">{post.summary}</span>
-                    <span className="wd-pazza-post-item-time">{post.time}</span>
+                    <TimeStamp iso={post.createdAt} format="list" className="wd-pazza-post-item-time" />
                 </div>
-                <span className={`wd-pazza-role-tag ${isInstructor ? "wd-instructor" : ""}`}>
-                    {isInstructor ? "Instructor" : "Student"}
-                </span>
-                <p className="wd-pazza-post-item-preview">{post.details}</p>
+                <RoleTag role={authorRole} />
+                {post.visibility === "INDIVIDUAL" && <span className="wd-pazza-private-tag">Private</span>}
+                {unread && <span className="wd-pazza-sr-only">(unread)</span>}
+                <p className="wd-pazza-post-item-preview">{htmlToText(post.details)}</p>
             </Link>
         </li>
     );
