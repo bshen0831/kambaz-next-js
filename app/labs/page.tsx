@@ -12,6 +12,11 @@ export default function Labs() {
                     </a>
                 </li>
                 <li>
+                    <a href="https://webdev-server-31i9.onrender.com" id="wd-server-link" rel="noopener noreferrer">
+                        Server URL
+                    </a>
+                </li>
+                <li>
                     <Link href="/labs/lab1" id="wd-lab1-link">
                         Lab 1: HTML Examples
                     </Link>
@@ -41,11 +46,7 @@ export default function Labs() {
                         Kambaz
                     </Link>
                 </li>
-                <li>
-                    <Link href="https://webdev-server-31i9.onrender.com" id="wd-kambaz-link">
-                        Server URL
-                    </Link>
-                </li>
+
             </ul>
         </div >
     );
