@@ -12,7 +12,8 @@ export default function WorkingWithRemoteObjectsAsync() {
     };
     useEffect(() => { fetchAssignment(); }, []);
     return (<>
-
+        <br />
+        <h4> Working with Remote Objects (Async)</h4>
         <p>Assignment: <b>{assignment.title}</b></p>
         <br />
         <h4>Updating Assignment Title</h4>

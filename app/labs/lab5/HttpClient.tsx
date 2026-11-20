@@ -20,6 +20,7 @@ export default function HttpClient() {
         fetchWelcomeOnLoad();
     }, []);
     return (<>
+        <h4>HttpClient</h4>
         <button type="button" onClick={fetchWelcomeOnClick}>Fetch Welcome</button>
         <p>Response from server: <b>{welcomeOnClick}</b></p>
         <br />

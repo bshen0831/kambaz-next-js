@@ -41,7 +41,12 @@ export default function Labs() {
                         Kambaz
                     </Link>
                 </li>
+                <li>
+                    <Link href="https://webdev-server-31i9.onrender.com" id="wd-kambaz-link">
+                        Server URL
+                    </Link>
+                </li>
             </ul>
-        </div>
+        </div >
     );
 }

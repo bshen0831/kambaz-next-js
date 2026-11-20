@@ -18,6 +18,8 @@ export default function WorkingWithRemoteObjects() {
     const MODULE_API_URL = `${HTTP_SERVER}/lab5/module`;
     return (
         <>
+            <br /><h4>Working with Remote Objects</h4>
+
             <h4>Retrieving Objects</h4>
             <a id="wd-retrieve-assignments"
                 className="rounded bg-blue-600 px-3 py-1.5 text-sm text-white"
