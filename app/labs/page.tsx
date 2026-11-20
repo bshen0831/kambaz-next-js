@@ -12,8 +12,13 @@ export default function Labs() {
                     </a>
                 </li>
                 <li>
-                    <a href="https://webdev-server-31i9.onrender.com" id="wd-server" target="_blank" rel="noopener noreferrer">
-                        https://webdev-server-31i9.onrender.com
+                    <a href="https://github.com/bshen0831/webdev-server/tree/a5" id="wd-server-github" target="_blank" rel="noopener noreferrer">
+                        Server Github Link
+                    </a>
+                </li>
+                <li>
+                    <a href="https://webdev-server-31i9.onrender.com" id="wd-server-url" target="_blank" rel="noopener noreferrer">
+                        Server Deployment URL
                     </a>
                 </li>
                 <li>
