@@ -1,0 +1,475 @@
+[
+  {
+    "_id": "P101",
+    "course": "RS101",
+    "type": "QUESTION",
+    "summary": "How do I compute specific impulse from thrust and mass flow rate?",
+    "details": "<p>HW1 problem 3 gives the thrust and the propellant mass flow rate. Is Isp = F / (m · g0) the right formula, and which units should I use?</p>",
+    "folders": [
+      "RS101-hw1"
+    ],
+    "author": "123",
+    "visibility": "CLASS",
+    "visibleTo": [],
+    "createdAt": "2026-11-19T10:24:00",
+    "views": 3,
+    "viewedBy": [
+      "123",
+      "678"
+    ],
+    "readBy": [
+      "123",
+      "678"
+    ],
+    "studentAnswers": [],
+    "instructorAnswers": [
+      {
+        "_id": "A101",
+        "author": "678",
+        "createdAt": "2026-11-19T11:02:00",
+        "content": "<p>Yes. Use Isp = F / (m · g0) with F in newtons, m in kg/s and g0 = 9.80665 m/s². The result is in seconds.</p>"
+      }
+    ],
+    "discussions": [
+      {
+        "_id": "D101",
+        "author": "234",
+        "createdAt": "2026-11-19T11:30:00",
+        "content": "<p>Does g0 change if the rocket is in orbit?</p>",
+        "resolved": false,
+        "replies": [
+          {
+            "_id": "R101",
+            "author": "123",
+            "createdAt": "2026-11-19T11:41:00",
+            "content": "<p>I think g0 is just a constant used for the units?</p>"
+          },
+          {
+            "_id": "R102",
+            "author": "678",
+            "createdAt": "2026-11-19T12:05:00",
+            "content": "<p>Correct. g0 is standard gravity at sea level; it stays the same no matter where the rocket is.</p>"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "P102",
+    "course": "RS101",
+    "type": "NOTE",
+    "summary": "Office hours moved to Thursday this week",
+    "details": "<p>This week's office hours are on Thursday 3-5pm in the usual room. The Zoom link is on Canvas.</p>",
+    "folders": [
+      "RS101-logistics",
+      "RS101-office_hours"
+    ],
+    "author": "678",
+    "visibility": "CLASS",
+    "visibleTo": [],
+    "createdAt": "2026-11-19T09:02:00",
+    "views": 12,
+    "viewedBy": [
+      "678",
+      "456",
+      "234",
+      "345"
+    ],
+    "readBy": [
+      "678",
+      "456",
+      "234",
+      "345"
+    ],
+    "studentAnswers": [],
+    "instructorAnswers": [],
+    "discussions": []
+  },
+  {
+    "_id": "P103",
+    "course": "RS101",
+    "type": "QUESTION",
+    "summary": "Why does the nozzle expansion ratio matter at sea level?",
+    "details": "<p>Why would a nozzle optimized for vacuum perform worse at sea level? More expansion should always mean more thrust, right?</p>",
+    "folders": [
+      "RS101-hw2"
+    ],
+    "author": "234",
+    "visibility": "CLASS",
+    "visibleTo": [],
+    "createdAt": "2026-11-18T16:15:00",
+    "views": 8,
+    "viewedBy": [
+      "234",
+      "345",
+      "123"
+    ],
+    "readBy": [
+      "234",
+      "345",
+      "123"
+    ],
+    "studentAnswers": [
+      {
+        "_id": "A102",
+        "author": "345",
+        "createdAt": "2026-11-18T18:20:00",
+        "content": "<p>At sea level an over-expanded nozzle drops the exit pressure below the outside air pressure, so the pressure-thrust term becomes negative.</p>"
+      }
+    ],
+    "instructorAnswers": [],
+    "discussions": [
+      {
+        "_id": "D102",
+        "author": "234",
+        "createdAt": "2026-11-18T19:00:00",
+        "content": "<p>Thanks, the pressure-thrust term was what I was missing.</p>",
+        "resolved": true,
+        "replies": []
+      }
+    ]
+  },
+  {
+    "_id": "P104",
+    "course": "RS101",
+    "type": "QUESTION",
+    "summary": "What is the maximum team size for the final project?",
+    "details": "<p>Can we work in teams of 5, or is the limit 4?</p>",
+    "folders": [
+      "RS101-project"
+    ],
+    "author": "345",
+    "visibility": "CLASS",
+    "visibleTo": [],
+    "createdAt": "2026-11-15T20:45:00",
+    "views": 5,
+    "viewedBy": [
+      "345",
+      "567"
+    ],
+    "readBy": [
+      "345",
+      "567"
+    ],
+    "studentAnswers": [],
+    "instructorAnswers": [],
+    "discussions": []
+  },
+  {
+    "_id": "P105",
+    "course": "RS101",
+    "type": "QUESTION",
+    "summary": "Which topics are covered on Exam 1?",
+    "details": "<p>Does Exam 1 include hybrid rocket motors, or only solid and liquid propulsion?</p>",
+    "folders": [
+      "RS101-exam"
+    ],
+    "author": "567",
+    "visibility": "CLASS",
+    "visibleTo": [],
+    "createdAt": "2026-11-05T13:10:00",
+    "views": 21,
+    "viewedBy": [
+      "567",
+      "456",
+      "678",
+      "123",
+      "234",
+      "345"
+    ],
+    "readBy": [
+      "567",
+      "456",
+      "678",
+      "123",
+      "234",
+      "345"
+    ],
+    "studentAnswers": [],
+    "instructorAnswers": [
+      {
+        "_id": "A103",
+        "author": "456",
+        "createdAt": "2026-11-05T15:30:00",
+        "content": "<p>Exam 1 covers solid and liquid propulsion. Hybrid motors are not included.</p>"
+      }
+    ],
+    "discussions": []
+  },
+  {
+    "_id": "P106",
+    "course": "RS101",
+    "type": "NOTE",
+    "summary": "Welcome to Rocket Propulsion!",
+    "details": "<p>Welcome everyone! Use Pazza for all course questions so that everyone benefits from the answers. Search before posting and pick the right folder.</p>",
+    "folders": [
+      "RS101-logistics",
+      "RS101-other"
+    ],
+    "author": "678",
+    "visibility": "CLASS",
+    "visibleTo": [],
+    "createdAt": "2026-11-02T09:00:00",
+    "views": 34,
+    "viewedBy": [
+      "678",
+      "456",
+      "123",
+      "234",
+      "345",
+      "567"
+    ],
+    "readBy": [
+      "678",
+      "456",
+      "123",
+      "234",
+      "345",
+      "567"
+    ],
+    "studentAnswers": [],
+    "instructorAnswers": [],
+    "discussions": []
+  },
+  {
+    "_id": "P201",
+    "course": "RS102",
+    "type": "NOTE",
+    "summary": "Welcome to Aerodynamics!",
+    "details": "<p>Welcome to RS4560. Lecture slides go up on the Modules page after every class. Post questions here and answer each other. Pepper and I check Pazza every day.</p>",
+    "folders": [
+      "RS102-logistics"
+    ],
+    "author": "789",
+    "visibility": "CLASS",
+    "visibleTo": [],
+    "createdAt": "2026-11-03T08:30:00",
+    "views": 18,
+    "viewedBy": [
+      "789",
+      "890",
+      "234",
+      "123",
+      "567",
+      "345"
+    ],
+    "readBy": [
+      "789",
+      "890",
+      "234",
+      "123",
+      "567",
+      "345"
+    ],
+    "studentAnswers": [],
+    "instructorAnswers": [],
+    "discussions": []
+  },
+  {
+    "_id": "P202",
+    "course": "RS102",
+    "type": "QUESTION",
+    "summary": "What is the difference between the lift coefficient and the lift force?",
+    "details": "<p>HW1 asks for both CL and L. Aren't they the same thing?</p>",
+    "folders": [
+      "RS102-hw1"
+    ],
+    "author": "567",
+    "visibility": "CLASS",
+    "visibleTo": [],
+    "createdAt": "2026-11-12T14:05:00",
+    "views": 9,
+    "viewedBy": [
+      "567",
+      "789",
+      "234"
+    ],
+    "readBy": [
+      "567",
+      "789",
+      "234"
+    ],
+    "studentAnswers": [
+      {
+        "_id": "A201",
+        "author": "234",
+        "createdAt": "2026-11-12T16:40:00",
+        "content": "<p>CL describes how good the wing shape is at making lift. The actual force L also depends on how fast you fly and how big the wing is.</p>"
+      }
+    ],
+    "instructorAnswers": [
+      {
+        "_id": "A202",
+        "author": "890",
+        "createdAt": "2026-11-12T17:10:00",
+        "content": "<p>CL is dimensionless: CL = L / (½ · ρ · V² · S). Multiply it back by the dynamic pressure and the wing area to get the lift force L in newtons.</p>"
+      }
+    ],
+    "discussions": []
+  },
+  {
+    "_id": "P203",
+    "course": "RS102",
+    "type": "QUESTION",
+    "summary": "At what Reynolds number does the boundary layer become turbulent?",
+    "details": "<p>HW2 problem 1 asks where transition happens on a flat plate, but the textbook gives a range of values. Which one should we use?</p>",
+    "folders": [
+      "RS102-hw2"
+    ],
+    "author": "123",
+    "visibility": "CLASS",
+    "visibleTo": [],
+    "createdAt": "2026-11-17T21:40:00",
+    "views": 4,
+    "viewedBy": [
+      "123",
+      "345"
+    ],
+    "readBy": [
+      "123",
+      "345"
+    ],
+    "studentAnswers": [],
+    "instructorAnswers": [],
+    "discussions": [
+      {
+        "_id": "D201",
+        "author": "345",
+        "createdAt": "2026-11-18T08:15:00",
+        "content": "<p>Same question. Is the 5×10⁵ value from the lecture slides the one to use?</p>",
+        "resolved": false,
+        "replies": [
+          {
+            "_id": "R201",
+            "author": "890",
+            "createdAt": "2026-11-18T09:00:00",
+            "content": "<p>Yes, use Re = 5×10⁵ for a flat plate unless the problem says otherwise.</p>"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "P204",
+    "course": "RS102",
+    "type": "QUESTION",
+    "summary": "Can I get a two-day extension on HW2?",
+    "details": "<p>I'm presenting at a conference this week and will be travelling until Friday. Could I hand in HW2 on Saturday instead?</p>",
+    "folders": [
+      "RS102-hw2",
+      "RS102-logistics"
+    ],
+    "author": "123",
+    "visibility": "INDIVIDUAL",
+    "visibleTo": [
+      "INSTRUCTORS"
+    ],
+    "createdAt": "2026-11-19T08:10:00",
+    "views": 2,
+    "viewedBy": [
+      "123",
+      "789"
+    ],
+    "readBy": [
+      "123",
+      "789"
+    ],
+    "studentAnswers": [],
+    "instructorAnswers": [
+      {
+        "_id": "A203",
+        "author": "789",
+        "createdAt": "2026-11-19T09:15:00",
+        "content": "<p>Yes, you can hand it in by Saturday at midnight. Good luck with the talk!</p>"
+      }
+    ],
+    "discussions": []
+  },
+  {
+    "_id": "P301",
+    "course": "RS103",
+    "type": "NOTE",
+    "summary": "Welcome to Spacecraft Design",
+    "details": "<p>This course is built around one team design project. Use the project and design_review folders for anything about your spacecraft.</p>",
+    "folders": [
+      "RS103-logistics",
+      "RS103-project"
+    ],
+    "author": "789",
+    "visibility": "CLASS",
+    "visibleTo": [],
+    "createdAt": "2026-11-04T10:00:00",
+    "views": 7,
+    "viewedBy": [
+      "789",
+      "678",
+      "456",
+      "890",
+      "345"
+    ],
+    "readBy": [
+      "789",
+      "678",
+      "456",
+      "890",
+      "345"
+    ],
+    "studentAnswers": [],
+    "instructorAnswers": [],
+    "discussions": []
+  },
+  {
+    "_id": "P302",
+    "course": "RS103",
+    "type": "QUESTION",
+    "summary": "How much margin should we keep in the power budget?",
+    "details": "<p>Our power budget closes with about 8% margin at end of life. Is that enough for the preliminary design review, or do we need more?</p>",
+    "folders": [
+      "RS103-project"
+    ],
+    "author": "345",
+    "visibility": "CLASS",
+    "visibleTo": [],
+    "createdAt": "2026-11-16T13:20:00",
+    "views": 3,
+    "viewedBy": [
+      "345",
+      "456"
+    ],
+    "readBy": [
+      "345",
+      "456"
+    ],
+    "studentAnswers": [],
+    "instructorAnswers": [],
+    "discussions": []
+  },
+  {
+    "_id": "P303",
+    "course": "RS103",
+    "type": "NOTE",
+    "summary": "Design review slots are posted",
+    "details": "<p>Sign up for a 20-minute design review slot next week. Bring your mass, power and link budgets.</p>",
+    "folders": [
+      "RS103-design_review"
+    ],
+    "author": "456",
+    "visibility": "CLASS",
+    "visibleTo": [],
+    "createdAt": "2026-11-18T11:45:00",
+    "views": 5,
+    "viewedBy": [
+      "456",
+      "678",
+      "789"
+    ],
+    "readBy": [
+      "456",
+      "678",
+      "789"
+    ],
+    "studentAnswers": [],
+    "instructorAnswers": [],
+    "discussions": []
+  }
+]
