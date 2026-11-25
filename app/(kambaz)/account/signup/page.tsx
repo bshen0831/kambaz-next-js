@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import * as client from "../client";
 import { useAccountContext } from "../AccountContext";
 
 export default function Signup() {
@@ -11,27 +13,38 @@ export default function Signup() {
     const { setCurrentUser } = useAccountContext();
     const router = useRouter();
 
-    const signup = () => {
+    const [error, setError] = useState("");
+
+    const signup = async () => {
         if (!username || !password) return;
-        setCurrentUser({
-            _id: crypto.randomUUID(),
-            username,
-            password,
-            firstName: "",
-            lastName: "",
-            email: "",
-            role: "STUDENT",
-            loginId: "",
-            section: "",
-            lastActivity: "",
-            totalActivity: "",
-        });
-        router.push("/account/profile");
+        try {
+            const user = await client.signup({
+                username,
+                password,
+                firstName: "",
+                lastName: "",
+                email: "",
+                role: "STUDENT",
+                loginId: "",
+                section: "",
+                lastActivity: "",
+                totalActivity: "",
+            });
+            setCurrentUser(user);
+            router.push("/account/profile");
+        } catch (e) {
+            setError(
+                axios.isAxiosError(e) && e.response?.data?.message
+                    ? e.response.data.message
+                    : "Unable to sign up. Try again later."
+            );
+        }
     };
 
     return (
         <div id="wd-signup-screen" className="max-w-sm">
             <h3>Sign up</h3>
+            {error && <div id="wd-signup-error" className="mb-2 text-red-600">{error}</div>}
             <input
                 id="wd-username"
                 placeholder="Username"

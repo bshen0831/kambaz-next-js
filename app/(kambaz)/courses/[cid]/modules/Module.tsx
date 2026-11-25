@@ -5,16 +5,20 @@ import { useModulesStore, type CourseModule } from "../../../store/modulesStore"
 export default function Module({
     module,
     children,
+    onUpdateModule,
+    onRemoveModule,
 }: {
     module: CourseModule;
     children?: ReactNode;
+    onUpdateModule: (module: CourseModule) => Promise<void>;
+    onRemoveModule: (moduleId: string) => Promise<void>;
 }) {
     const updateModule = useModulesStore((state) => state.updateModule);
     const [draft, setDraft] = useState(module.name);
-    const save = () => {
+    const save = async () => {
         const name = draft.trim();
         if (name) {
-            updateModule({ ...module, name, editing: false });
+            await onUpdateModule({ ...module, name });
         } else {
             cancel();
         }
@@ -40,7 +44,10 @@ export default function Module({
                 ) : (
                     <span>{module.name}</span>
                 )}
-                <ModuleControlButtons moduleId={module._id} />
+                <ModuleControlButtons
+                    moduleId={module._id}
+                    onRemoveModule={onRemoveModule}
+                />
             </div>
             <ul className="wd-lessons m-0 list-none p-0">{children}</ul>
         </li>

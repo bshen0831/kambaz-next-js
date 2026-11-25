@@ -12,6 +12,16 @@ export default function Labs() {
                     </a>
                 </li>
                 <li>
+                    <a href="https://github.com/bshen0831/webdev-server/tree/a5" id="wd-server-github" target="_blank" rel="noopener noreferrer">
+                        Server Github Link
+                    </a>
+                </li>
+                <li>
+                    <a href="https://webdev-server-31i9.onrender.com" id="wd-server-url" target="_blank" rel="noopener noreferrer">
+                        Server Deployment URL
+                    </a>
+                </li>
+                <li>
                     <Link href="/labs/lab1" id="wd-lab1-link">
                         Lab 1: HTML Examples
                     </Link>
@@ -41,7 +51,8 @@ export default function Labs() {
                         Kambaz
                     </Link>
                 </li>
+
             </ul>
-        </div>
+        </div >
     );
 }

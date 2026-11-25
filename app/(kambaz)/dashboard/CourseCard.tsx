@@ -1,15 +1,25 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useCoursesStore, type Course } from "../store/coursesStore";
-
+import * as client from "../courses/client";
 export default function CourseCard({
     course,
     onEdit,
+    enrolled,
+    onEnroll,
+    onUnenroll,
 }: {
     course: Course;
     onEdit: () => void;
+    enrolled: boolean;
+    onEnroll: (courseId: string) => Promise<void>;
+    onUnenroll: (courseId: string) => Promise<void>;
 }) {
     const deleteCourse = useCoursesStore((state) => state.deleteCourse);
+    const onDeleteCourse = async (courseId: string) => {
+        await client.deleteCourse(courseId);
+        deleteCourse(courseId);
+    };
     return (
         <div className="wd-dashboard-course w-[300px] max-w-full overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
             <Link
@@ -53,10 +63,24 @@ export default function CourseCard({
                         className="ms-2 inline-flex items-center justify-center rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white"
                         onClick={(event) => {
                             event.preventDefault();
-                            deleteCourse(course._id);
+                            onDeleteCourse(course._id);
                         }}
                     >
                         Delete
+                    </button>
+                    <button
+                        type="button"
+                        id="wd-enrollment-click"
+                        className={`mt-2 block w-full rounded px-3 py-1.5 text-sm font-medium text-white ${
+                            enrolled ? "bg-red-600" : "bg-green-600"
+                        }`}
+                        onClick={(event) => {
+                            event.preventDefault();
+                            if (enrolled) onUnenroll(course._id);
+                            else onEnroll(course._id);
+                        }}
+                    >
+                        {enrolled ? "Unenroll" : "Enroll"}
                     </button>
                 </div>
             </Link>

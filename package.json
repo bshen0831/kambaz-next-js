@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.13.0",
+    "axios": "^1.21.1",
+    "dotenv": "^18.0.10",
+    "express-session": "^1.19.0",
     "@tiptap/extensions": "3.32.2",
     "@tiptap/pm": "3.32.2",
     "@tiptap/react": "3.32.2",
@@ -24,6 +27,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/express-session": "^1.19.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
