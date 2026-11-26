@@ -11,6 +11,7 @@ const LINKS = [
     { href: "/labs/lab3", id: "wd-lab3-link", label: "Lab 3", match: (p: string) => p.includes("/lab3") },
     { href: "/labs/lab4", id: "wd-lab4-link", label: "Lab 4", match: (p: string) => p.includes("/lab4") },
     { href: "/labs/lab5", id: "wd-lab5-link", label: "Lab 5", match: (p: string) => p.includes("/lab5") },
+    { href: "/labs/lab6", id: "wd-lab6-link", label: "Lab 6", match: (p: string) => p.includes("/lab6") },
     { href: "https://webdev-client.vercel.app/book/ch1#sec-1-3-11", id: "wd-book-chapter-1", label: "Link to book chapter 1, section 1.3.11", match: (p: string) => false },
 
     { href: "/", id: "wd-kambaz-link", label: "Kambaz", match: () => false },

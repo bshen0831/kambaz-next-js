@@ -23,12 +23,27 @@ export default function AccountNavigation() {
                     }
                 >
                     {link === "signin"
-                        ? "Signin"
+                        ? "Sign In"
                         : link === "signup"
-                            ? "Signup"
+                            ? "Sign Up"
                             : "Profile"}
                 </Link>
             ))}
+            {currentUser && currentUser.role === "ADMIN" && (
+                <>
+                    <Link
+                        href="/account/users"
+                        className={
+                            pathname.endsWith("users")
+                                ? "font-semibold text-black"
+                                : "text-red-600"
+                        }
+                    >
+                        Users
+                    </Link>
+                    <br />
+                </>
+            )}
         </div>
     );
 }
