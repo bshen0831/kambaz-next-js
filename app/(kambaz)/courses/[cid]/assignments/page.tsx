@@ -67,7 +67,7 @@ export default function Assignments() {
                 id="wd-assignments-title"
                 className="mb-3 flex items-center justify-between rounded bg-neutral-200 p-3 text-lg"
             >
-                <span>ASSIGNMENTS 40% of Total</span>
+                <span>ASSIGNMENTS</span>
                 <button type="button" className="rounded border bg-white px-2 py-0.5 text-sm">
                     <FaPlus />
                 </button>
